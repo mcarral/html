@@ -602,11 +602,14 @@ class FieldBuilder
      */
     protected function getDefaultClasses($type)
     {
-        return isset($this->cssClasses[$type])
-            ? $this->cssClasses[$type]
-            : isset($this->cssClasses['default'])
-                ? $this->cssClasses['default']
-                : '';
+        $cssClasses = '';
+        if(isset($this->cssClasses[$type])) {
+            $cssClasses = $this->cssClasses[$type];
+        } elseif(isset($this->cssClasses['default'])) {
+            $cssClasses = $this->cssClasses['default'];
+        }
+
+        return $cssClasses;
     }
 
     /**
