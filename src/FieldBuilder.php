@@ -634,7 +634,7 @@ class FieldBuilder
         }
 
         if ( ! empty($errors)) {
-            $classes .= ' '.(isset($classes['error']) ? $classes['error'] : 'error');
+            $classes .= ' '.(isset($this->cssClasses['error']) ? $this->cssClasses['error'] : 'error');
         }
 
         return trim($classes);
