@@ -46,6 +46,10 @@ class Message
         $this->container->add($this);
     }
 
+    public function __toString(){
+        return $this->container->render();
+    }
+
     /**
      * Returns the message in array format
      *
@@ -125,5 +129,9 @@ class Message
         $items = !is_array($items) ? $items->all() : $items;
         $this->message['items'] = $items;
         return $this;
+    }
+
+    public function render() {
+        return $this->container->render();
     }
 }
