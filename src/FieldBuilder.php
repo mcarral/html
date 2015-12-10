@@ -628,7 +628,6 @@ class FieldBuilder
     protected function getClasses($type, array $attributes = [], $errors = null)
     {
         $classes = $this->getDefaultClasses($type);
-
         if (isset($attributes['class'])) {
             $classes .= ' '.$attributes['class'];
         }
@@ -805,6 +804,9 @@ class FieldBuilder
                     $value,
                     $attributes
                 );
+            case 'submit':
+            case 'button':
+                return $this->form->$type($this->getLabel($htmlName, $attributes), $attributes);
             default:
                 return $this->form->$type($htmlName, $value, $attributes);
         }
