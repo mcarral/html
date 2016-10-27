@@ -2,6 +2,7 @@
 
 namespace spec\Styde\Html;
 
+use Illuminate\Contracts\View\Factory;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument as Arg;
 
@@ -11,8 +12,10 @@ use Styde\Html\Theme;
 
 class FormBuilderSpec extends ObjectBehavior
 {
-    function let(HtmlBuilder $html, UrlGenerator $url, Theme $theme)
+    function let(HtmlBuilder $html, UrlGenerator $url, Theme $theme, Factory $view)
     {
+        $theme->getView()->shouldBeCalled()->willReturn($view);
+
         $this->beConstructedWith($html, $url, 'csrf_token', $theme);
     }
 
@@ -34,7 +37,7 @@ class FormBuilderSpec extends ObjectBehavior
     function it_generates_time_inputs($html)
     {
         // Expect
-        $html->attributes(['type' => 'time']);
+        $html->attributes(Arg::withEntry('type', 'time'));
 
         // When
         $this->time('time');

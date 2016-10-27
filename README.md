@@ -1,5 +1,7 @@
 # StydeNet Html package
 
+[![Build Status](https://travis-ci.org/StydeNet/html.svg?branch=master)](https://travis-ci.org/StydeNet/html)
+
 This package contains a collection of Laravel PHP classes designed to generate common HTML components, such as:
 
 * Menus
@@ -11,7 +13,19 @@ This is an extension of the Laravel Collective [HTML package](https://github.com
 
 ## How to install
 
-1. The preferred way to install this package is through Composer. Do this by either running `composer require "styde/html=~1.0"` or adding `"styde/html": "~1.0"` to your `composer.json` file and then running `composer update`.
+1. The preferred way to install this package is through Composer:
+
+**Laravel 5.3 users**:
+
+Install by running `composer require "styde/html=~1.2"` or adding `"styde/html": "~1.2"` to your `composer.json` file and then running `composer update`.
+
+**Laravel 5.2 users**:
+
+Install by running `composer require "styde/html=~1.1"` or adding `"styde/html": "~1.1"` to your `composer.json` file and then running `composer update`.
+
+**Laravel 5.1 users**:
+
+Install by running `composer require "styde/html=~1.0"` or adding `"styde/html": "~1.0"` to your `composer.json` file and then running `composer update`.
 
 2. Next, add the new provider to the `providers` array in `config/app.php`
 
@@ -50,7 +64,7 @@ If you plan to use the _Access Handler_ as a standalone class, you will need to 
 ```
 'aliases' => [
     // ...
-    'Access' => Styde\Html\Facades\Access,
+    'Access' => Styde\Html\Facades\Access::class,
     // ...
 ],
 ```
@@ -62,6 +76,8 @@ Optionally, you may also run `php artisan vendor:publish --provider='Styde\Html\
 Since this package is largely using [LaravelCollective/Html](https://github.com/laravelcollective/html), its documentation for forms and fields is applicable to this package.
 
 ## Sandbox
+
+[![Build Status](https://travis-ci.org/StydeNet/html-integration-tests.svg)](https://travis-ci.org/StydeNet/html-integration-tests)
 
 This package aims to stay well documented and unit tested; however, there is another repository that includes integration tests and several routes, so you can clone it to watch the components of this package in action in your browser or run the included integration tests. 
 
