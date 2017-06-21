@@ -4,6 +4,7 @@ namespace Styde\Html;
 
 use Styde\Html\Access\VerifyAccess;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Translation\Translator as Lang;
 
 class FieldBuilder
@@ -55,12 +56,11 @@ class FieldBuilder
      */
     protected $templates = [];
     /**
-     * Current session errors. If a field contains errors, they'll be render as
-     * part of the field's template.
+     * Current session.
      *
-     * @var array
+     * @var \Illuminate\Contracts\Session\Session
      */
-    protected $errors = [];
+    protected $session;
 
     /**
      * Creates a new Field Builder.
@@ -117,20 +117,11 @@ class FieldBuilder
     }
 
     /**
-     * Set the current session errors. If a field contains errors,
-     * they'll be render as part of the field's template.
-     * You must set them as an associative array of arrays, i.e.:
-     *
-     * [
-     *   'email' => ['Invalid email']
-     *   'password' => ['Needs upper case', 'Needs lower case', 'Needs klingon']
-     * ]
-     *
-     * @param array $errors
+     * Set the current session
      */
-    public function setErrors(array $errors)
+    public function setSessionStore(Session $session)
     {
-        $this->errors = $errors;
+        $this->session = $session;
     }
 
     /**
@@ -655,7 +646,13 @@ class FieldBuilder
      */
     protected function getControlErrors($name)
     {
-        return isset($this->errors[$name]) ? $this->errors[$name] : [];
+        if ($this->session) {
+            if ($errors = $this->session->get('errors')) {
+                return $errors->get($name, []);
+            }
+        }
+
+        return [];
     }
 
     /**
